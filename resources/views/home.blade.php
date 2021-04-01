@@ -15,30 +15,14 @@
                     @endif
 
                     Bienvenido {{ Auth::user()->name }}
+                    
+                    <div style="margin-top: 24px" class="row">
+                        <button type="button" class="btn-large btn-outline-info" onclick="location.href='{{ url('usuarios/index') }}'"><img src="{{asset('images/ic_usuarios.png')}}" width="64" height="64"><br>Usuarios App<br><span class="subtext">Añadir, editar o eliminar<p>usuarios de la aplicación.</p></span></button>
 
-                    <form style="padding: .5rem 4rem; font-size: 2rem;" action="{{ url('/usuarios/index') }}">
-                        <input type="submit" class="btn-large btn-outline-info" value="Usuarios" />
-                    </form>
+                        <button type="button" class="btn-large btn-outline-info" onclick="location.href='{{ url('tinacos/index') }}'"><img src="{{asset('images/ic_tinacos.png')}}" width="64" height="64"><br>Tinacos<br><span class="subtext">Añadir, editar o eliminar<p>tinacos.</p></span></button>
 
-                    <form style="padding: .5rem 4rem; font-size: 2rem;" action="https://play.google.com/store">
-                        <input type="submit" class="btn-large btn-outline-info" value="Tinacos" />
-                    </form>
-
-                    <form style="padding: .5rem 4rem; font-size: 2rem;" action="https://play.google.com/store">
-                        <input type="submit" class="btn-large btn-outline-info" value="Consumo" />
-                    </form>
-
-                    <!-- <a href="{{ url('/tinaco') }}">
-                        <div style="width: 600px; height: 50px; border: 1px solid #000; margin-top: 15px; justify-content: center; align-items: center;  display: flex">
-                            <p style="font-size: 18px">Tinacos</p>
-                        </div>
-                    </a>
-
-                    <a href="{{ url('/consums') }}">
-                        <div style="width: 600px; height: 50px; border: 1px solid #000; margin-top: 15px; justify-content: center; align-items: center;  display: flex">
-                            <p style="font-size: 18px">Consumo</p>
-                        </div> -->
-                    </a>
+                        <button type="button" class="btn-large btn-outline-info" onclick="location.href='{{ url('consumo/index') }}'"><img src="{{asset('images/ic_consumo.png')}}" width="64" height="64"><br>Consumo<br><span class="subtext">Añadir, editar o eliminar<p>consumo.</p></span></button>
+                    </div>
 
                 </div>
             </div>

@@ -47,9 +47,13 @@
             -ms-user-select: none;
             user-select: none;
             border: 2px solid transparent;
-            padding: .375rem .75rem;
             display: block;
+            position: relative;
+            -webkit-box-flex: 0;
+            flex: 0 0 33.33333%;
+            max-width: 33.33333%;
             width: 100%;
+            padding: 15px 15px;
             font-size: 3rem;
             line-height: 1.5;
             border-radius: .25rem;
@@ -180,6 +184,36 @@
             background-color: #17a2b8;
             border-color: #17a2b8;
         }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            margin-right: auto;
+            margin-left: auto;
+        }
+
+        .subtext {
+            font-size: 1.2rem;
+        }
+
+        .alert {
+            position: relative;
+            padding: .75rem 1.25rem;
+            margin-bottom: 1rem;
+            border: 1px solid transparent;
+            border-radius: .25rem;
+        }
+
+        .alert-primary {
+            color: #000;
+            text-align: center;
+            background-color: #cce5ff;
+            border-color:#b8daff;
+        }
+
+        .alert-primary hr {
+            border-top-color:#9fcdff;
+        }
     </style>
 </head>
 <body style="background-color: #41b5be">
@@ -247,6 +281,11 @@
             </div>
         </nav>
 
+        @if(Session::has('message'))
+        <div class="alert alert-primary" role="alert">
+            {{ Session::get('message') }}
+        </div>
+        @endif
         @yield('content')
     </div>
 

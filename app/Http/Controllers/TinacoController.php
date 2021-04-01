@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Usuario;
+use App\Tinaco;
 
-class UsuarioController extends Controller
+class TinacoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,10 +15,10 @@ class UsuarioController extends Controller
     public function index()
     {
         $client = new \GuzzleHttp\Client(['verify' => false]);
-        $request = $client->get('http://hidrocontrol-api.atwebpages.com/usuario/');
+        $request = $client->get('http://hidrocontrol-api.atwebpages.com/tinaco/');
         $response = $request->getBody()->getContents();        
-        $usuarios = json_decode($response);
-        return view('usuarios.index', compact('usuarios'));
+        $tinacos = json_decode($response);
+        return view('tinacos.index', compact('tinacos'));
     }
 
     /**
@@ -28,7 +28,7 @@ class UsuarioController extends Controller
      */
     public function create()
     {
-        return view('usuarios.create');
+        return view('tinacos.create');
     }
 
     /**
@@ -40,17 +40,15 @@ class UsuarioController extends Controller
     public function store(Request $request)
     {
         $client = new \GuzzleHttp\Client(['verify' => false]);
-        $response = $client->request('POST', 'http://hidrocontrol-api.atwebpages.com/usuario/', [
+        $response = $client->request('POST', 'http://hidrocontrol-api.atwebpages.com/tinaco/', [
             'json' => [
-                'tipoUsuario' => $request->input('tipoUsuario'),
-                'usuario' => $request->input('usuario'),
-                'contrasena' => $request->input('contrasena'),
+                'cantidadAgua' => $request->input('cantidadAgua'),
             ]
         ]);
         $response = $response->getBody()->getContents();
         $json = json_decode($response);
         $message = $json->message;
-        return redirect('usuarios/index')->with('message', $message);
+        return redirect('tinacos/index')->with('message', $message);
     }
 
     /**
@@ -61,11 +59,7 @@ class UsuarioController extends Controller
      */
     public function show($id)
     {
-        $client = new \GuzzleHttp\Client(['verify' => false]);
-        $request = $client->get('http://hidrocontrol-api.atwebpages.com/usuario/'.$id);
-        $response = $request->getBody()->getContents();
-        $usuario = json_decode($response);
-        return view('usuarios.show', compact('usuario'));
+        //
     }
 
     /**
@@ -77,10 +71,10 @@ class UsuarioController extends Controller
     public function edit($id)
     {
         $client = new \GuzzleHttp\Client(['verify' => false]);
-        $request = $client->get('http://hidrocontrol-api.atwebpages.com/usuario/'.$id);
+        $request = $client->get('http://hidrocontrol-api.atwebpages.com/tinaco/'.$id);
         $response = $request->getBody()->getContents();
-        $usuario = json_decode($response);
-        return view('usuarios.edit', compact('usuario'));
+        $tinaco = json_decode($response);
+        return view('tinacos.edit', compact('tinaco'));
     }
 
     /**
@@ -93,18 +87,15 @@ class UsuarioController extends Controller
     public function update(Request $request, $id)
     {
         $client = new \GuzzleHttp\Client(['verify' => false]);
-        $response = $client->request('PUT', 'http://hidrocontrol-api.atwebpages.com/usuario/'.$id, [
+        $response = $client->request('PUT', 'http://hidrocontrol-api.atwebpages.com/tinaco/'.$id, [
             'json' => [
-                'tipoUsuario' => $request->input('tipoUsuario'),
-                'usuario' => $request->input('usuario'),
-                'contrasena' => $request->input('contrasena'),
-                'estado' => $request->input('estado'),
+                'cantidadAgua' => $request->input('cantidadAgua'),
             ]
         ]);
         $response = $response->getBody()->getContents();
         $json = json_decode($response);
         $message = $json->message;
-        return redirect('usuarios/index')->with('message', $message);
+        return redirect('tinacos/index')->with('message', $message);
     }
 
     /**
@@ -116,10 +107,10 @@ class UsuarioController extends Controller
     public function destroy($id)
     {
         $client = new \GuzzleHttp\Client(['verify' => false]);
-        $response = $client->request('DELETE', 'http://hidrocontrol-api.atwebpages.com/usuario/'.$id);
+        $response = $client->request('DELETE', 'http://hidrocontrol-api.atwebpages.com/tinaco/'.$id);
         $response = $response->getBody()->getContents();
         $json = json_decode($response);
         $message = $json->message;
-        return redirect('usuarios/index')->with('message', $message);
+        return redirect('tinacos/index')->with('message', $message);
     }
 }

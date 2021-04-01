@@ -19,51 +19,27 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/all', function () {
-    foreach (Usuario::all() as $usuario) {
-        echo $usuario->nombre;
-    }
-});
-
-Route::get('/find', function () {
-    $usuario = Usuario::find(1);
-    echo $usuario->nombre;
-});
-Route::get('/findOrFail', function () {
-    $usuario = Usuario::findOrFail(3);
-    echo $usuario->nombre;
-});
-
-Route::get('/insert', function () {
-    $usuario = new Usuario;
-    $usuario->nombre = 'Joel';
-    $usuario->save();
-});
-
-Route::get('/update', function () {
-    $usuario = Usuario::find(1);
-    $usuario->nombre = 'Lucero';
-    $usuario->save();
-});
-
-Route::get('/delete', function () {
-    $usuario = Usuario::find(3);
-    $usuario->delete();
-});
-
 //Usuarios
+Route::get('/usuarios/index', 'UsuarioController@index');
+Route::get('/usuarios/create', 'UsuarioController@create');
+Route::post('/usuarios/store', 'UsuarioController@store');
+Route::get('/usuarios/show/{id}', 'UsuarioController@show');
+Route::get('/usuarios/edit/{id}', 'UsuarioController@edit');
+Route::put('/usuarios/update/{id}', 'UsuarioController@update');
+Route::delete('/usuarios/destroy/{id}', 'UsuarioController@destroy');
 
-Route::get('/usuarios/index', 'App\Http\Controllers\UsuarioController@index');
-Route::get('/usuarios/create', 'App\Http\Controllers\UsuarioController@create');
-Route::post('/usuarios/store', 'App\Http\Controllers\UsuarioController@store');
-Route::get('/usuarios/edit/{id}', 'App\Http\Controllers\UsuarioController@edit');
-Route::put('/usuarios/update/{id}', 'App\Http\Controllers\UsuarioController@update');
-Route::delete('/usuarios/destroy/{id}', 'App\Http\Controllers\UsuarioController@destroy');
+//Tinacos
+Route::get('/tinacos/index', 'TinacoController@index');
+Route::get('/tinacos/create', 'TinacoController@create');
+Route::post('/tinacos/store', 'TinacoController@store');
+Route::get('/tinacos/edit/{id}', 'TinacoController@edit');
+Route::put('/tinacos/update/{id}', 'TinacoController@update');
+Route::delete('/tinacos/destroy/{id}', 'TinacoController@destroy');
 
-//API
-Route::get('/usuariosApi/index', 'App\Http\Controllers\UsuariosApiController@index');
-Route::post('/usuariosApi/store', 'App\Http\Controllers\UsuariosApiController@store');
-
-Route::get('/usuarioGuzzle/index', 'App\Http\Controllers\UsuarioGuzzleController@index');
-Route::post('/usuarioGuzzle/store', 'App\Http\Controllers\UsuarioGuzzleController@store');
-Route::get('/usuarioGuzzle/show/{id}', 'App\Http\Controllers\UsuarioGuzzleController@show');
+//Consumo
+Route::get('/consumo/index', 'ConsumoController@index');
+Route::get('/consumo/create', 'ConsumoController@create');
+Route::post('/consumo/store', 'ConsumoController@store');
+Route::get('/consumo/edit/{id}', 'ConsumoController@edit');
+Route::put('/consumo/update/{id}', 'ConsumoController@update');
+Route::delete('/consumo/destroy/{id}', 'ConsumoController@destroy');
